@@ -17,7 +17,7 @@ obj.array = [
     {prop1: val1, pos: 'fourth'}
 ];
 
-var result;
+var testCount = 1;
 
 
 /* if (obj && obj.array)
@@ -31,6 +31,8 @@ var result;
     }
 } */
 
+console.log('-------');
+console.log('TEST #%s', testCount++);
 
 fluent.check(obj).and(obj.array).and(undefined).notnull()
 .then(function()
@@ -42,6 +44,9 @@ fluent.check(obj).and(obj.array).and(undefined).notnull()
     console.log(err);
 });
 
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 fluent.check(null).and(undefined).null()
 .then(function()
 {
@@ -52,6 +57,8 @@ fluent.check(null).and(undefined).null()
     console.log(err);
 });
 
+console.log('-------');
+console.log('TEST #%s', testCount++);
 
 fluent.from(obj.array)
 .where({prop1: val1})
@@ -66,9 +73,28 @@ fluent.from(obj.array)
     console.log(err);
 });
 
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 fluent.from(obj.array)
 .where({prop1: val1})
+.otherwise(function(err)
+{
+    console.log(err);
+})
 .then(function(item, stop)
+{
+    console.log('item: %s', JSON.stringify(item));
+
+    stop(); // eventually decide to
+});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+fluent.from(obj.array)
+.where({prop1: val1})
+.then(function(item /*, stop */)
 {
     console.log('item: %s', JSON.stringify(item));
 
@@ -78,6 +104,9 @@ fluent.from(obj.array)
 {
     console.log(err);
 });
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
 
 fluent.from(obj.array)
 .where({prop1: val1})
@@ -90,6 +119,9 @@ fluent.from(obj.array)
     console.log(err);
 });
 
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 fluent.from(obj.array)
 .where({prop1: val1})
 .first(function(item)
@@ -101,6 +133,9 @@ fluent.from(obj.array)
     console.log(err);
 });
 
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 fluent.from(obj.array)
 .where({prop1: val1})
 .last(function(item)
@@ -110,6 +145,37 @@ fluent.from(obj.array)
 .otherwise(function(err)
 {
     console.log(err);
+});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+fluent.check(obj).and(obj.array).notnull()
+.then(fluent.from(obj.array)
+      .where(function(item, ok, not_ok)
+      {
+          if (item.prop1 === val1)
+          {
+              return ok();
+          }
+          else
+          {
+              return not_ok();
+          }
+      })
+      .then(function(item, stop)
+      {
+          console.log('item: %s', JSON.stringify(item));
+    
+          stop();
+      })
+      .otherwise(function(err)
+      {
+          console.log('%s', err);
+      }))
+.otherwise(function(err)
+{
+    console.log('%s', err);
 });
 
 
@@ -124,32 +190,6 @@ fluent.from(obj.array)
 .otherwise(function(err)
 {
     console.log(err);
-});
-
-fluent.check(obj).and(obj.array).notnull()
-.then(fluent.from(obj.array)
-      .where(function(item, index, ok, not_ok)
-      {
-          if (item.prop1 === val1)
-          {
-              ok();
-          }
-          else
-          {
-              not_ok();
-          }
-      })
-      .then(function(item, next, stop)
-      {
-          result = item.value;
-    
-          next();
-          // or
-          stop();
-      }))
-.catch(function(err)
-{
-    console.log('%s', err);
 }); */
 
 
