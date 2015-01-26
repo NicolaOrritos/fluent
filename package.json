@@ -1,0 +1,28 @@
+{
+    "name": "fluent",
+    "version": "0.0.1",
+    "description": "Fluent Javascript Flows",
+    "scripts": {
+        "test": "test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/NicolaOrritos/fluent.git"
+    },
+    "keywords": [
+        "fluent",
+        "javascript",
+        "flow",
+        "promises"
+    ],
+    "author": "Nicola Orritos",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/NicolaOrritos/fluent/issues"
+    },
+    "homepage": "https://github.com/NicolaOrritos/fluent",
+    "dependencies":
+    {
+        "bluebird": "^2.8.2"
+    }
+}
