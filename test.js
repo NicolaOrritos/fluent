@@ -2,7 +2,7 @@
 
 'use strict';
 
-var fluent = require('./lib/fluent.js');
+var fluent = require('./lib/main.js');
 
 
 // Some example data:
