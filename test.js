@@ -178,18 +178,17 @@ fluent.check(obj).and(obj.array).notnull()
     console.log('%s', err);
 });
 
+console.log('-------');
+console.log('TEST #%s', testCount++);
 
-/* fluent.from(obj.array)
-.where({prop1: val1})
-.then(function(item, stop)
+fluent.bundle(obj, 'hola', [], [1])
+.then(function(result)
 {
-    result = item.value;
-
-    stop(); // eventually decide to
+    console.log('result: %s', JSON.stringify(result));
 })
 .otherwise(function(err)
 {
-    console.log(err);
-}); */
+    console.log('%s', err);
+});
 
 
