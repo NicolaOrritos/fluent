@@ -60,6 +60,32 @@ fluent.check(null).and(undefined).null()
 console.log('-------');
 console.log('TEST #%s', testCount++);
 
+fluent.notnull(obj, obj.array)
+.otherwise(function(err)
+{
+    console.log('%s', err);
+})
+.then(function()
+{
+    console.log('Everything\'s OK');
+});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+fluent.notnull(obj, null)
+.otherwise(function(err)
+{
+    console.log('%s', err);
+})
+.then(function()
+{
+    console.log('Everything\'s OK');
+});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 fluent.from(obj.array)
 .where({prop1: val1})
 .then(function(item, stop)
@@ -190,5 +216,4 @@ fluent.bundle(obj, 'hola', [], [1])
 {
     console.log('%s', err);
 });
-
 
