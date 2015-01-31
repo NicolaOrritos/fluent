@@ -266,3 +266,19 @@ function callMeMaybe3(arg1, arg2)
 
 callMeMaybe3(obj, {});
 
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+function callMeMaybe4(arg1, arg2, arg3)
+{
+    fluent.constrain(arg1, arg2).objects()
+    .constrain(arg3).notnull()
+    .throws()
+    .valid(function()
+    {
+        console.log('Everything\'s OK');
+    });
+}
+
+callMeMaybe4(obj, {}, '');
+
