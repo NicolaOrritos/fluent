@@ -217,3 +217,52 @@ fluent.bundle(obj, 'hola', [], [1])
     console.log('%s', err);
 });
 
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+function callMeMaybe(arg1, arg2, arg3)
+{
+    fluent.constrain(arg1, arg2, arg3).notnull()
+    .valid(function()
+    {
+        console.log('Everything\'s OK');
+    })
+    .otherwise(function(err)
+    {
+        console.log('%s', err);
+    });
+}
+
+callMeMaybe('boooh', '', {});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+function callMeMaybe2(arg1, arg2, arg3)
+{
+    fluent.constrain(arg1, arg2, arg3).notnull()
+    .throws()
+    .valid(function()
+    {
+        console.log('Everything\'s OK');
+    });
+}
+
+// callMeMaybe2('boooh');  // This one throws
+callMeMaybe2(0, 1, 2);  // This one doesn't throw
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+function callMeMaybe3(arg1, arg2)
+{
+    fluent.constrain(arg1, arg2).objects()
+    .throws()
+    .valid(function()
+    {
+        console.log('Everything\'s OK');
+    });
+}
+
+callMeMaybe3(obj, {});
+
