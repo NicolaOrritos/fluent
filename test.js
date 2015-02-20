@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 'use strict';
 
@@ -298,7 +298,7 @@ fluent.call(function()
 {
     if (err)
     {
-        console.log('Everything\'s OK');
+        console.log('Is everything OK? ' + err);
     }
     else
     {
@@ -344,6 +344,10 @@ fluent.call(function()
 {
     if (err)
     {
-        console.log('Everything\'s OK');
+        console.log('Is everything OK? ' + err);
+    }
+    else
+    {
+        throw new Error('Test failed');
     }
 });
