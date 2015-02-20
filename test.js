@@ -282,3 +282,68 @@ function callMeMaybe4(arg1, arg2, arg3)
 
 callMeMaybe4(obj, {}, '');
 
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+fluent.call(function()
+{
+    throw new Error('error1');
+})
+.then(function()
+{
+    throw new Error('Test failed');
+})
+.otherwise(function(err)
+{
+    if (err)
+    {
+        console.log('Everything\'s OK');
+    }
+    else
+    {
+        throw new Error('Test failed');
+    }
+});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+fluent.call(function()
+{
+    return 'OK';
+})
+.then(function(result)
+{
+    if (result === 'OK')
+    {
+        console.log('Everything\'s %s', result);
+    }
+    else
+    {
+        throw new Error('Test failed. Result: ' + result);
+    }
+})
+.otherwise(function(err)
+{
+    throw new Error('Test failed. ' + err);
+});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+fluent.call(function()
+{
+    return new Error('error1');
+})
+.then(function()
+{
+    throw new Error('Test failed');
+})
+.otherwise(function(err)
+{
+    if (err)
+    {
+        console.log('Everything\'s OK');
+    }
+});
