@@ -351,3 +351,30 @@ fluent.call(function()
         throw new Error('Test failed');
     }
 });
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+fluent.call(function()
+{
+    return 'result1';
+    
+}, function(res)
+{
+    return res + '-result2';
+})
+.then(function(result)
+{
+    if (result === 'result1-result2')
+    {
+        console.log('Everything\'s OK');
+    }
+    else
+    {
+        throw new Error('Test failed. Result: ' + result);
+    }
+})
+.otherwise(function(err)
+{
+    throw new Error('Test failed. ' + err);
+});
