@@ -102,6 +102,42 @@ fluent.from(obj.array)
 console.log('-------');
 console.log('TEST #%s', testCount++);
 
+fluent.from([])
+.where({prop1: val1})
+.then(function()
+{
+    throw new Error('Should have been empty');
+})
+.otherwise(function(err)
+{
+    throw new Error('Should have been recognized as empty. Raised an error instead. ' + err);
+})
+.empty(function()
+{
+    console.log('Everything\'s OK');
+});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+fluent.from([])
+.where({prop1: val1})
+.then(function()
+{
+    throw new Error('Should have been empty');
+})
+.empty(function()
+{
+    console.log('Everything\'s OK');
+})
+.otherwise(function(err)
+{
+    throw new Error('Should have been recognized as empty. Raised an error instead. ' + err);
+});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 fluent.from(obj.array)
 .where({prop1: val1})
 .otherwise(function(err)
