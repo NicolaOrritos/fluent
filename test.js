@@ -414,3 +414,36 @@ fluent.call(function()
 {
     throw new Error('Test failed. ' + err);
 });
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+var result = fluent.protect(function(param1, param2)
+{
+    if (   param1 === 'param1'
+        && param2 === 'param2')
+    {
+        console.log('Got parameters right');
+        
+        return param1 + param2;
+    }
+    else
+    {
+        throw new Error('Test failed. Parameters mismatch: ' + param1 + ', ' + param2);
+    }
+})
+.pass('param1', 'param2')
+.catch(function(err)
+{
+    throw new Error('Test failed. ' + err);
+})
+.return();
+
+if (result === 'param1param2')
+{
+    console.log('Everything\'s OK');
+}
+else
+{
+    throw new Error('Test failed. Result mismatch: ' + result);
+}
