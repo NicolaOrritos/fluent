@@ -5,9 +5,7 @@ Fluent is my personal attempt at simplifying and making more readable Javascript
 
 
 ## Installation
-``` Bash
-npm install f.luent
-```
+[Coming soon...]
 
 
 ## Usage
