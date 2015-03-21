@@ -274,6 +274,24 @@ callMeMaybe('boooh', '', {});
 console.log('-------');
 console.log('TEST #%s', testCount++);
 
+function callMeMaybe1bis(arg1, arg2, arg3)
+{
+    fluent.constrain([arg1, arg2, arg3]).notnull()
+    .valid(function()
+    {
+        console.log('Everything\'s OK');
+    })
+    .otherwise(function(err)
+    {
+        console.log('%s', err);
+    });
+}
+
+callMeMaybe1bis('boooh', '', {});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 function callMeMaybe2(arg1, arg2, arg3)
 {
     fluent.constrain(arg1, arg2, arg3).notnull()
@@ -418,6 +436,27 @@ fluent.call(function()
 console.log('-------');
 console.log('TEST #%s', testCount++);
 
+var called = false;
+
+fluent.protect(function()
+{
+    console.log('Everything\'s OK.');
+    
+    called = true;
+})
+.catch(function(err)
+{
+    throw new Error('Test failed. ' + err);
+});
+
+if (!called)
+{
+    throw new Error('Test failed. Function wasn\'t called.');
+}
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 var result = fluent.protect(function(param1, param2)
 {
     if (   param1 === 'param1'
@@ -442,6 +481,42 @@ var result = fluent.protect(function(param1, param2)
 if (result === 'param1param2')
 {
     console.log('Everything\'s OK');
+}
+else
+{
+    throw new Error('Test failed. Result mismatch: ' + result);
+}
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+fluent.protect(function(param1, param2)
+{
+    throw new Error('Test failed. Shouldn\'t have entered here. Parameters were: ' + param1 + ', ' + param2);
+})
+.pass('param1', undefined)
+.catch(function(err)
+{
+    console.log('Everything\'s OK. ' + err);
+});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+var result = fluent.protect(function(param1, param2)
+{
+    throw new Error('Test failed. Shouldn\'t have entered here. Parameters were: ' + param1 + ', ' + param2);
+})
+.pass('param1', undefined)
+.catch(function(err)
+{
+    console.log('Everything\'s OK (1). ' + err);
+})
+.return();
+
+if (result === undefined || result === null)
+{
+    console.log('Everything\'s OK (2)');
 }
 else
 {
