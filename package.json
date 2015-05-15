@@ -1,6 +1,6 @@
 {
-    "name": "fluent",
-    "version": "0.0.1",
+    "name": "f.luent",
+    "version": "0.1.0",
     "description": "Fluent Javascript Flows",
     "scripts": {
         "test": "test.js"
