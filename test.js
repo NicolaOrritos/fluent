@@ -37,11 +37,11 @@ console.log('TEST #%s', testCount++);
 fluent.check(obj).and(obj.array).and(undefined).notnull()
 .then(function()
 {
-    console.log('Everything\'s OK');
+    throw new Error('Test failed. Not recognized error in parameter.');
 })
 .otherwise(function(err)
 {
-    console.log(err);
+    console.log('Everything\'s OK. %s', err);
 });
 
 console.log('-------');
@@ -76,11 +76,11 @@ console.log('TEST #%s', testCount++);
 fluent.notnull(obj, null)
 .otherwise(function(err)
 {
-    console.log('%s', err);
+    console.log('Everything\'s OK');
 })
 .then(function()
 {
-    console.log('Everything\'s OK');
+    console.log('Test failed. One parameter was null');
 });
 
 console.log('-------');
@@ -335,6 +335,22 @@ function callMeMaybe4(arg1, arg2, arg3)
 }
 
 callMeMaybe4(obj, {}, '');
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+function callMeMaybe5(arg1, arg2, arg3)
+{
+    fluent.constrain(arg1, arg2).strings()
+    .constrain(arg3).number()
+    .throws()
+    .valid(function()
+    {
+        console.log('Everything\'s OK');
+    });
+}
+
+callMeMaybe5('', 'hello world', 42);
 
 
 console.log('-------');
