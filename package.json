@@ -1,28 +1,32 @@
 {
-    "name": "f.luent",
-    "version": "0.4.0",
-    "description": "Fluent Javascript Flows",
-    "scripts": {
-        "test": "test.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/NicolaOrritos/fluent.git"
-    },
-    "keywords": [
-        "fluent",
-        "javascript",
-        "flow",
-        "promises"
-    ],
-    "author": "Nicola Orritos",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/NicolaOrritos/fluent/issues"
-    },
-    "homepage": "https://github.com/NicolaOrritos/fluent",
-    "dependencies":
-    {
-        "bluebird": "^2.8.2"
-    }
+  "name": "f.luent",
+  "version": "0.6.0",
+  "description": "Fluent Javascript Flows",
+  "files": [
+    "lib"
+  ],
+  "main": "lib/main.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolaOrritos/fluent.git"
+  },
+  "keywords": [
+    "fluent",
+    "javascript",
+    "flow",
+    "promises"
+  ],
+  "author": "Nicola Orritos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NicolaOrritos/fluent/issues"
+  },
+  "homepage": "https://github.com/NicolaOrritos/fluent",
+  "dependencies": {
+    "bluebird": "^2.8.2"
+  },
+  "devDependencies": {}
 }
