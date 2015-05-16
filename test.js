@@ -74,7 +74,7 @@ console.log('-------');
 console.log('TEST #%s', testCount++);
 
 fluent.notnull(obj, null)
-.otherwise(function(err)
+.otherwise(function()
 {
     console.log('Everything\'s OK');
 })
@@ -351,6 +351,40 @@ function callMeMaybe5(arg1, arg2, arg3)
 }
 
 callMeMaybe5('', 'hello world', 42);
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+function callMeMaybe6(arg1)
+{
+    fluent.constrain(arg1).string()
+    .valid(function()
+    {
+        throw new Error('Shouldn\'t have validated');
+    })
+    .otherwise(function(err)
+    {
+        console.log('Everything\'s OK (1).');
+    });
+    
+    try
+    {
+        fluent.constrain(arg1).string().throws('Bad boy');
+    }
+    catch(err)
+    {
+        if (err.message === 'Bad boy')
+        {
+            console.log('Everything\'s OK (2).');
+        }
+        else
+        {
+            throw new Error('Throws didn\'t took custom message');
+        }
+    }
+}
+
+callMeMaybe6(42);
 
 
 console.log('-------');
