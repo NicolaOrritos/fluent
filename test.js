@@ -364,7 +364,7 @@ function callMeMaybe6(arg1)
     })
     .otherwise(function(err)
     {
-        console.log('Everything\'s OK (1).');
+        console.log('Everything\'s OK (1). %s', err);
     });
     
     try
@@ -375,7 +375,7 @@ function callMeMaybe6(arg1)
     {
         if (err.message === 'Bad boy')
         {
-            console.log('Everything\'s OK (2).');
+            console.log('Everything\'s OK (2). %s', err);
         }
         else
         {
@@ -385,6 +385,39 @@ function callMeMaybe6(arg1)
 }
 
 callMeMaybe6(42);
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+function callMeMaybe7(arg1, arg2)
+{
+    fluent.constrain(arg1, arg2).arrays()
+    .throws()
+    .valid(function()
+    {
+        console.log('Everything\'s OK');
+    });
+}
+
+callMeMaybe7([], [1, 2, 3]);
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+function callMeMaybe8(arg1, arg2)
+{
+    fluent.constrain(arg1, arg2).arrays()
+    .valid(function()
+    {
+        throw new Error('Should not have validated. Arg1: "' + arg1 + '", arg2: "' + arg2 + '"');
+    })
+    .otherwise(function(err)
+    {
+        console.log('Everything\'s OK. %s', err);
+    });
+}
+
+callMeMaybe8('Ain\'t no array', [1, 2, 3]);
 
 
 console.log('-------');
