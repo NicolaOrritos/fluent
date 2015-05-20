@@ -1,6 +1,6 @@
 {
   "name": "f.luent",
-  "version": "0.6.2",
+  "version": "0.6.4",
   "description": "Fluent Javascript Flows",
   "files": [
     "lib"
