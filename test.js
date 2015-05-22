@@ -256,6 +256,17 @@ fluent.bundle(obj, 'hola', [], [1])
 console.log('-------');
 console.log('TEST #%s', testCount++);
 
+var arr = [1, 2];
+
+fluent.constrain(arr).array().throws()
+.valid(function()
+{
+    console.log('Everything\'s OK');
+});
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 function callMeMaybe(arg1, arg2, arg3)
 {
     fluent.constrain(arg1, arg2, arg3).notnull()
