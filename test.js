@@ -212,6 +212,38 @@ fluent.from(obj.array)
 console.log('-------');
 console.log('TEST #%s', testCount++);
 
+var matching = fluent.from(obj.array)
+.where({prop1: val1})
+.all();
+
+if (matching && matching.length === 3)
+{
+    console.log('Everything\'s OK. (Matching: "%s")', JSON.stringify(matching));
+}
+else
+{
+    throw new Error('"All + Where" combination gave up. Faulty value returned: ' + JSON.stringify(matching));
+}
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+var matching = fluent.from([4, 4, 4, 4, 5, 3, 2, 1, 0, null, 5, 7, 5, 9])
+.where(4)
+.all();
+
+if (matching && matching.length === 4 && matching[0] === 0 && matching[1] === 1 && matching[2] === 2 && matching[3] === 3)
+{
+    console.log('Everything\'s OK. (Matching: "%s")', JSON.stringify(matching));
+}
+else
+{
+    throw new Error('"All + Where" combination for simple arrays gave up. Faulty value returned: ' + JSON.stringify(matching));
+}
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 fluent.check(obj).and(obj.array).notnull()
 .then(fluent.from(obj.array)
       .where(function(item, ok, not_ok)
@@ -228,7 +260,7 @@ fluent.check(obj).and(obj.array).notnull()
       .then(function(item, stop)
       {
           console.log('item: %s', JSON.stringify(item));
-    
+
           stop();
       })
       .otherwise(function(err)
@@ -377,7 +409,7 @@ function callMeMaybe6(arg1)
     {
         console.log('Everything\'s OK (1). %s', err);
     });
-    
+
     try
     {
         fluent.constrain(arg1).string().throws('Bad boy');
@@ -439,7 +471,7 @@ var called = false;
 fluent.protect(function()
 {
     console.log('Everything\'s OK.');
-    
+
     called = true;
 })
 .catch(function(err)
@@ -461,7 +493,7 @@ var result = fluent.protect(function(param1, param2)
         && param2 === 'param2')
     {
         console.log('Got parameters right');
-        
+
         return param1 + param2;
     }
     else
