@@ -1,6 +1,6 @@
 {
   "name": "f.luent",
-  "version": "0.6.6",
+  "version": "0.6.8",
   "description": "Fluent Javascript Flows",
   "files": [
     "lib"
@@ -25,8 +25,6 @@
     "url": "https://github.com/NicolaOrritos/fluent/issues"
   },
   "homepage": "https://github.com/NicolaOrritos/fluent",
-  "dependencies": {
-    "bluebird": "^2.8.2"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }
