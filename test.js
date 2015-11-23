@@ -244,6 +244,38 @@ else
 console.log('-------');
 console.log('TEST #%s', testCount++);
 
+var matching = fluent.from([4, 4, 4, 4, 5, 3, 2, 1, 0, null, 5, 7, 5, 9])
+.where(4)
+.first();
+
+if (matching === 0)
+{
+    console.log('Everything\'s OK. (Matching: "%s")', JSON.stringify(matching));
+}
+else
+{
+    throw new Error('"All + Where" combination for simple arrays gave up. Faulty value returned: ' + JSON.stringify(matching));
+}
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+var matching = fluent.from([4, 4, 4, 4, 5, 3, 2, 1, 0, null, 5, 7, 5, 9])
+.where(4)
+.last();
+
+if (matching === 3)
+{
+    console.log('Everything\'s OK. (Matching: "%s")', JSON.stringify(matching));
+}
+else
+{
+    throw new Error('"All + Where" combination for simple arrays gave up. Faulty value returned: ' + JSON.stringify(matching));
+}
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
 fluent.check(obj).and(obj.array).notnull()
 .then(fluent.from(obj.array)
       .where(function(item, ok, not_ok)
