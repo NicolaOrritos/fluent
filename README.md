@@ -1,20 +1,22 @@
-# fluent
-Fluent Javascript Flows
+# f.luent
+Zero-dependencies Fluent Javascript Control Flow
 
-Fluent is my personal attempt at simplifying and making more readable Javascript control flow, by using methods and chaining.
+Fluent is my personal attempt at simplifying and making more readable the control flow of a Javascript program, by only using methods and exploiting chaining whenever it's possible.
 
 
 ## Installation
-[Coming soon...]
+```Bash
+npm install f.luent
+```
 
 
-## Usage
+## Example Usage
 ``` js
-var fluent = require('f.luent');
+var f = require('f.luent');
 
 // ...
 
-fluent.from(array)
+f.from(array)
 .where({prop1: 'val1'})
 .then(function(item, stop)
 {
