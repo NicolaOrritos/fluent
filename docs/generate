@@ -1,0 +1,3 @@
+#! /bin/bash
+
+markdox ../lib/**/*.js -o reference.md
