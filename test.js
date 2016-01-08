@@ -584,3 +584,86 @@ else
 {
     throw new Error('Test failed. Result mismatch: ' + result);
 }
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+var seconds = 10;
+
+var finished = fluent.last(seconds * 1000).max()
+.then(function()
+{
+    seconds = 2;
+
+    finished = fluent.last(seconds * 1000).max()
+    .then(function()
+    {
+        throw new Error('Test failed. It shouldn\'t have detected a function running for more than ' + seconds + ' seconds.');
+    })
+    .otherwise(function()
+    {
+        console.log('Everything\'s OK. We detected a long-lived function that should have lasted less');
+    });
+
+    setTimeout(finished, 3 * 1000);
+})
+.otherwise(function()
+{
+    throw new Error('Test failed. Shouldn\'t have lasted more than ' + seconds + ' seconds.');
+});
+
+setTimeout(finished, 8 * 1000);
+
+console.log('Everything\'s OK');
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+seconds = 5;
+
+finished = fluent.last(seconds * 1000).min()
+.then(function()
+{
+    console.log('Everything\'s OK');
+
+    console.log('-------');
+    console.log('TEST #%s', testCount++);
+
+    seconds = 5;
+
+    finished = fluent.last(seconds * 1000).min()
+    .then(function()
+    {
+        throw new Error('Test failed. Shouldn\'t have lasted less than ' + seconds + ' seconds.');
+    })
+    .otherwise(function()
+    {
+        console.log('Everything\'s OK. We detected a short-lived function that should have lasted more');
+    });
+
+    setTimeout(finished, 2 * 1000);
+})
+.otherwise(function()
+{
+    throw new Error('Test failed. Shouldn\'t have lasted less than ' + seconds + ' seconds.');
+});
+
+setTimeout(finished, 6 * 1000);
+
+console.log('-------');
+console.log('TEST #%s', testCount++);
+
+seconds = 2;
+
+var finished = fluent.last(seconds * 1000).max()
+.aggressive()
+.then(function()
+{
+    throw new Error('Test failed. Shouldn\'t have survived the check.');
+})
+.otherwise(function()
+{
+    console.log('Everything\'s OK. We detected a long-lived function that should have lasted less');
+});
+
+setTimeout(finished, 3 * 1000);
