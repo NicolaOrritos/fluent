@@ -57,4 +57,17 @@ describe('Fluent library, "check" verb', function()
             done();
         });
     });
+
+    it('Simple successful check', function(done)
+    {
+        f.check(null).and(undefined).null()
+        .then(function()
+        {
+            done();
+        })
+        .otherwise(function(/* err */)
+        {
+            throw new Error('Test failed. Should have validated.');
+        });
+    });
 });
