@@ -1,15 +1,17 @@
-/* global describe, it */
+
 'use strict';
 
-var assert  = require('assert');
+/* global describe, it */
 
-var f = require('../lib/main.js');
+let assert  = require('assert');
+
+let f = require('../lib/main.js');
 
 
 // Some test data:
-var val1 = 'val1';
+let val1 = 'val1';
 
-var obj = {};
+let obj = {};
 
 obj.array = [
     {prop1: val1, pos: 'first'},
@@ -19,16 +21,16 @@ obj.array = [
 ];
 
 
-describe('Fluent library, basic checks', function()
+describe('Fluent library, basic checks', () =>
 {
-    it('Gets successfully required', function(done)
+    it('Gets successfully required', done =>
     {
         assert(f !== null);
 
         done();
     });
 
-    it('Contains all verbs and all of them are functions', function(done)
+    it('Contains all verbs and all of them are functions', done =>
     {
         assert(f.check.apply);
         assert(f.notnull.apply);
@@ -41,16 +43,16 @@ describe('Fluent library, basic checks', function()
     });
 });
 
-describe('Fluent library, "check" verb', function()
+describe('Fluent library, "check" verb', () =>
 {
-    it('Many objects check for a not-null condition', function(done)
+    it('Many objects check for a not-null condition', done =>
     {
         f.check(obj).and(obj.array).and(undefined).notnull()
-        .then(function()
+        .then( () =>
         {
             throw new Error('Test failed. Not recognized error in parameter.');
         })
-        .otherwise(function(err)
+        .otherwise( err =>
         {
             assert(err !== null);
 
@@ -58,14 +60,14 @@ describe('Fluent library, "check" verb', function()
         });
     });
 
-    it('Simple successful check', function(done)
+    it('Simple successful check', done =>
     {
         f.check(null).and(undefined).null()
-        .then(function()
+        .then( () =>
         {
             done();
         })
-        .otherwise(function(/* err */)
+        .otherwise( (/* err */) =>
         {
             throw new Error('Test failed. Should have validated.');
         });
