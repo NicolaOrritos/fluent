@@ -38,6 +38,7 @@ describe('Fluent library, basic checks', () =>
         assert(f.bundle.apply);
         assert(f.constrain.apply);
         assert(f.protect.apply);
+        assert(f.sanitize.apply);
 
         done();
     });
@@ -71,5 +72,64 @@ describe('Fluent library, "check" verb', () =>
         {
             throw new Error('Test failed. Should have validated.');
         });
+    });
+});
+
+describe('Fluent library, "sanitize" verb', () =>
+{
+    it('Returns an empty string when given "null" or "undefined" values', done =>
+    {
+        const result = f.sanitize().string(undefined);
+
+        if (result === '')
+        {
+            done();
+        }
+        else
+        {
+            throw new Error('Test failed. Should have returned "\'\'".');
+        }
+    });
+
+    it('Returns "\'0\'" string when given number "0"', done =>
+    {
+        const result = f.sanitize().string(0);
+
+        if (result === '0')
+        {
+            done();
+        }
+        else
+        {
+            throw new Error('Test failed. Should have returned "\'0\'".');
+        }
+    });
+
+    it('Returns "\'false\'" string when given boolean "false"', done =>
+    {
+        const result = f.sanitize().string(false);
+
+        if (result === 'false')
+        {
+            done();
+        }
+        else
+        {
+            throw new Error('Test failed. Should have returned "\'false\'".');
+        }
+    });
+
+    it('Returns "\'true\'" string when given boolean "true"', done =>
+    {
+        const result = f.sanitize().string(true);
+
+        if (result === 'true')
+        {
+            done();
+        }
+        else
+        {
+            throw new Error('Test failed. Should have returned "\'true\'".');
+        }
     });
 });
